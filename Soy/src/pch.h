@@ -23,6 +23,7 @@
 #include <sstream>
 #include <fstream>
 #include <cmath>
+#include <chrono>
 
 //SFML
 #include <SFML\System.hpp>
