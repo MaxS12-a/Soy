@@ -1,3 +1,4 @@
 .vs
 bin
-**/logs
+*.log
+Soy/logs
