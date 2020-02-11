@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include "Button.h"
 
 class MainMenuState : public State
 {
@@ -11,13 +12,18 @@ public:
 	//Funcs
 	void update();
 	void render();
+
+	void initButtons();
 private:
-	sf::Image icon;
-	sf::Texture texture;
-	sf::Font font;
-	sf::Sprite sprite;
-	sf::Music music;
-	sf::Text text;
-	std::string luaStr;
+	sf::Font buttonsFont;
+	sf::SoundBuffer buttonHoverSBuffer, buttonPressedSBuffer;
+	sf::Sound buttonHoverS, buttonPressedS;
+	std::map<std::string, Button*> buttons;
+	sf::Vector2i buttonsAnchor;
+	bool mouseClik, mousePressed;
+
+	sf::Music mmsMusic;
+	sf::Texture mmsBgTexture;
+	sf::Sprite mmsBg;
 };
 

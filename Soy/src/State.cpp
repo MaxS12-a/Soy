@@ -9,3 +9,10 @@ State::State(Game* game, sf::RenderWindow* window)
 State::~State()
 {
 }
+
+void State::updateMousePos()
+{
+	mousePosScreen = sf::Mouse::getPosition();
+	mousePosWindow = sf::Mouse::getPosition(*window);
+	mousePosView = window->mapPixelToCoords(mousePosWindow);
+}

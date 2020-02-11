@@ -10,13 +10,15 @@ Game::Game()
     setTargetUps(60);
     setTargetFps(60);
 
-    stateStack.emplace(new MainMenuState(this, &window));
+    mms = new MainMenuState(this, &window);
+    pushState(mms);
 
     run();
 }
 
 Game::~Game()
 {
+    delete mms;
 }
 
 //Loop Funcs
@@ -114,4 +116,15 @@ void Game::setTargetFps(int targetFps)
 const int Game::getSecondsRunning() const
 {
     return secondsRunning;
+}
+
+//State manager
+void Game::pushState(State* state)
+{
+    stateStack.push(state);
+}
+
+void Game::popState()
+{
+    stateStack.pop();
 }

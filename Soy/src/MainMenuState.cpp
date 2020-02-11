@@ -1,60 +1,87 @@
 #include "pch.h"
 #include "MainMenuState.h"
 #include "Game.h"
+#include "MMSetingsState.h"
 
 //Constructors
 MainMenuState::MainMenuState(Game* game, sf::RenderWindow* window)
-	: State(game, window)
+	: State(game, window), mouseClik(false), mousePressed(false)
 {
-    // Set the Icon
-    if (!icon.loadFromFile("Resources/icon.png")) LOG_CRITICAL("Missing Icon.");
-    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    LOG_INFO("Icon loaded.");
-    
-    // Load a sprite to display
-    if (!texture.loadFromFile("Resources/cute_image.jpg")) LOG_CRITICAL("Mssing image!");
-    sprite.setTexture(texture);
-    LOG_INFO("Sprite created.");
-    
-    // Create a graphical text to display
-    if (!font.loadFromFile("Resources/sansation.ttf")) LOG_CRITICAL("Missing font!");
-    
-    // Lua test
-    lua_State* L = luaL_newstate();
-    if (luaL_dostring(L, "l = \"LUA IS WORKING\"")) { LOG_CRITICAL("LUA IS NOT FINE!"); throw("Closing application"); };
-    lua_getglobal(L, "l");
-    luaStr = lua_tostring(L, -1);
-    lua_close(L);
-    LOG_INFO("LUA IS FINE!");
-    
-    text.setString(luaStr);
-    text.setFont(font);
-    text.setCharacterSize(50);
-    text.setFillColor(sf::Color::Black);
-    LOG_INFO("Text created.");
-    
-    // Load a music to play
-    if (!music.openFromFile("Resources/nice_music.ogg")) LOG_CRITICAL("Missing song.");
-    
-    music.play();
-    music.setLoop(true);
-    music.setPitch(1.3);
-    LOG_INFO("Audio is ok.");
+    initButtons();
+
+    mmsBgTexture.loadFromFile("Resources/Images/MMSBG.jpg");
+    mmsBg.setTexture(mmsBgTexture);
+    mmsBg.setPosition(0,0);
+
+    mmsMusic.openFromFile("Resources/Sounds/MMSMusic.wav");
+
+    mmsMusic.play();
 }
 
 MainMenuState::~MainMenuState()
 {
 }
 
-
 //Funcs
 void MainMenuState::update()
 {
-    if (game->getSecondsRunning() % 4 == 0) text.move(1,1);
+    updateMousePos();
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (mousePressed) mouseClik = false;
+        else mouseClik = true;
+        mousePressed = true;
+    }
+    else mousePressed = false;
+
+    //Buttons logic
+    for (auto i : buttons) i.second->update(sf::Vector2i((int)mousePosView.x, (int) mousePosView.y));
+    
+    if (mouseClik && buttons["New Game"]->getHover()) {
+        buttons["New Game"]->press();
+    }
+    if (mouseClik && buttons["W"]->getHover()) {
+        buttons["W"]->press();
+    }
+    if (mouseClik && buttons["Settings"]->getHover()) {
+        buttons["Settings"]->press();
+        game->pushState(new MMSetingsState(game, window));
+    }
+    if (mouseClik && buttons["Exit"]->getHover()) {
+        buttons["Exit"]->press();
+        window->close();
+    }
 }
 
 void MainMenuState::render()
 {
-    window->draw(sprite);
-    window->draw(text);
+    window->draw(mmsBg);
+
+    for (auto i : buttons) i.second->render(window);
+}
+
+void MainMenuState::initButtons()
+{
+    buttonsFont.loadFromFile("Resources/sansation.ttf");
+    
+    buttonHoverSBuffer.loadFromFile("Resources/Sounds/ButtonHoverSound.ogg");
+    buttonHoverS.setBuffer(buttonHoverSBuffer);
+
+    buttonPressedSBuffer.loadFromFile("Resources/Sounds/ButtonPressedSound.ogg");
+    buttonPressedS.setBuffer(buttonPressedSBuffer);
+
+    buttonsAnchor.x = 35; buttonsAnchor.y = 275;
+
+    buttons["New Game"] = new Button(buttonsAnchor.x, buttonsAnchor.y, 200, 75, true, sf::Color::Transparent, sf::Color::Transparent,
+        "New Game", sf::Color(255, 255, 255, 255), sf::Color(255,0, 255 ,255), 50, buttonsFont, 0, sf::Color::Transparent,
+        buttonHoverS, buttonPressedS);
+    buttons["W"] = new Button(buttonsAnchor.x, buttonsAnchor.y + 75, 200, 75, true, sf::Color::Transparent, sf::Color::Transparent,
+        "W", sf::Color(255, 255, 255, 255), sf::Color(0, 255, 0, 255), 50, buttonsFont, 0, sf::Color::Transparent,
+        buttonHoverS, buttonPressedS);
+    buttons["Settings"] = new Button(buttonsAnchor.x, buttonsAnchor.y + 150, 200, 75, true, sf::Color::Transparent, sf::Color::Transparent,
+        "Settings", sf::Color(255, 255, 255, 255), sf::Color(0, 0, 255, 255), 50, buttonsFont, 0, sf::Color::Transparent,
+        buttonHoverS, buttonPressedS);
+    buttons["Exit"] = new Button(buttonsAnchor.x, buttonsAnchor.y + 225, 200, 75, true, sf::Color::Transparent, sf::Color::Transparent,
+        "Exit", sf::Color(255, 255, 255, 255), sf::Color(255, 0, 0, 255), 50, buttonsFont, 0, sf::Color::Transparent,
+        buttonHoverS, buttonPressedS);
 }

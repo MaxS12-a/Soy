@@ -167,6 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\MMSetingsState.cpp" />
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\MainMenuState.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Log.cpp">
@@ -183,6 +185,8 @@
     <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MMSetingsState.h" />
+    <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\MainMenuState.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Log.h" />

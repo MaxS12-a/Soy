@@ -22,10 +22,16 @@ public:
 	void setTargetFps(int targetFps);
 	const int getSecondsRunning() const;
 
+	//State manager
+	void pushState(State* state);
+	void popState();
+
 private:
 	sf::RenderWindow window;
 	sf::Event event;
+	sf::View windowView;
 
+	State* mms;
 	std::stack<State*> stateStack;
 
 	//Game loop variables

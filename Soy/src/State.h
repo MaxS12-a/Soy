@@ -14,10 +14,14 @@ public:
 	virtual void update() = 0;
 	virtual void render() = 0;
 
+	virtual void updateMousePos();
 protected:
 	Game* game;
 	sf::RenderWindow* window;
 
+	sf::Vector2i mousePosScreen;
+	sf::Vector2i mousePosWindow;
+	sf::Vector2f mousePosView;
 private:
 
 };
