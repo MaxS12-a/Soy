@@ -6,12 +6,17 @@ class MainMenuState : public State
 {
 public:
 	//Constructors
-	MainMenuState(Game* game, sf::RenderWindow* window);
+	MainMenuState(StateStuff* stateStuff);
 	virtual ~MainMenuState();
 
 	//Funcs
 	void update();
 	void render();
+
+	void pauseState();
+	void resumeState();
+
+	void remake();
 
 	void initButtons();
 private:
@@ -25,5 +30,7 @@ private:
 	sf::Music mmsMusic;
 	sf::Texture mmsBgTexture;
 	sf::Sprite mmsBg;
+
+	sf::Vector2i mousePosS, mousePosW;
 };
 

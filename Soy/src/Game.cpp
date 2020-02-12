@@ -5,20 +5,21 @@
 Game::Game()
     : ups(0), fps(0), secondsRunning(0)
 {
-    window.create(sf::VideoMode(800, 600), "SFML WORKS!");
+    window.create(sf::VideoMode::getDesktopMode(), "SFML WORKS!", sf::Style::Fullscreen);
+
+    stateStuff = new StateStuff({ this, &window, 1 });
 
     setTargetUps(60);
     setTargetFps(60);
 
-    mms = new MainMenuState(this, &window);
-    pushState(mms);
+    stateStack.push(new MainMenuState(stateStuff));
 
     run();
 }
 
 Game::~Game()
 {
-    delete mms;
+    
 }
 
 //Loop Funcs
@@ -121,10 +122,13 @@ const int Game::getSecondsRunning() const
 //State manager
 void Game::pushState(State* state)
 {
+    stateStack.top()->pauseState();
     stateStack.push(state);
 }
 
 void Game::popState()
 {
+    delete stateStack.top();
     stateStack.pop();
+    stateStack.top()->resumeState();
 }

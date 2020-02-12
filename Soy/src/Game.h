@@ -31,8 +31,8 @@ private:
 	sf::Event event;
 	sf::View windowView;
 
-	State* mms;
 	std::stack<State*> stateStack;
+	StateStuff* stateStuff;
 
 	//Game loop variables
 	int ups, fps, targetUps, targetFps, secondsRunning;

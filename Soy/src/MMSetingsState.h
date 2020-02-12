@@ -1,18 +1,24 @@
 #pragma once
 #include "State.h"
 #include "Button.h"
+#include "Selector.h"
 
 class MMSetingsState :
 	public State
 {
 public:
 	//Constructors
-	MMSetingsState(Game* game, sf::RenderWindow* window);
+	MMSetingsState(StateStuff* stateStuff);
 	virtual ~MMSetingsState();
 
 	//Funcs
 	void update();
 	void render();
+
+	void pauseState();
+	void resumeState();
+
+	void remake();
 
 	void initButtons();
 private:
@@ -23,10 +29,14 @@ private:
 	sf::Vector2i buttonsAnchor;
 	bool mouseClik, mousePressed;
 
-	sf::Vector2i mousePos, mousePosWindow;
+	sf::Texture mmssBgTexture;
+	sf::Sprite mmssBg;
 
-	sf::Music mmsMusic;
-	sf::Texture mmsBgTexture;
-	sf::Sprite mmsBg;
+	sf::Vector2i mousePosS, mousePosW;
+
+	sf::Texture resSelectorArrowTexture;
+	std::vector<sf::VideoMode> resOptions;
+	Selector* resSelector;
 };
+
 

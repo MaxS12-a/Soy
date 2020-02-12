@@ -2,9 +2,9 @@
 class Button
 {
 public:
-	Button(int posX, int posY, int width, int height, bool colisionBoxFRectTText, const sf::Color& buttonColorIdle, const sf::Color& buttonColorHover,
+	Button(int posX, int posY,
 		const char* bname, const sf::Color& textColorIdle, const sf::Color& textColorHover, int charSize, const sf::Font& textFont,
-		int borderSize, const sf::Color& borderColor, sf::Sound& hoverSound, sf::Sound& pressedSound);
+		sf::Sound& hoverSound, sf::Sound& pressedSound);
 	virtual ~Button();
 
 	void update(sf::Vector2i mousePosWindow);
@@ -12,15 +12,13 @@ public:
 
 	void press();
 	const bool getHover() const;
-private:
-	sf::RectangleShape buttonRect;
-	sf::Color buttonColorIdle, buttonColorHover;
-	sf::FloatRect* baseRect;
 
+	const sf::FloatRect getGlobalBounds() const;
+
+private:
+	sf::FloatRect* baseRect;
 	sf::Text text;
 	sf::Color textColorIdle, textColorHover;
-
-	sf::RectangleShape borderRect;
 
 	sf::Sound& hoverSound;
 	sf::Sound& pressedSound;

@@ -7,6 +7,9 @@
     <Filter Include="States">
       <UniqueIdentifier>{0bec2927-8fa8-41d5-ac48-0b06f75a93a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gadgets">
+      <UniqueIdentifier>{929c7cc3-a4c5-4471-8e0a-3b3fa8269f08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Soy.cpp">
@@ -27,11 +30,14 @@
     <ClCompile Include="src\MainMenuState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="src\Button.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="src\MMSetingsState.cpp">
       <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Gadgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Selector.cpp">
+      <Filter>Gadgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +56,14 @@
     <ClInclude Include="src\MainMenuState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="src\Button.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="src\MMSetingsState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>Gadgets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Selector.h">
+      <Filter>Gadgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
