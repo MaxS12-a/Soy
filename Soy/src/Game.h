@@ -1,5 +1,6 @@
 #pragma once
 #include "MainMenuState.h"
+#include "TextButton.h"
 
 class Game
 {
@@ -29,7 +30,6 @@ public:
 private:
 	sf::RenderWindow window;
 	sf::Event event;
-	sf::View windowView;
 
 	std::stack<State*> stateStack;
 	StateStuff* stateStuff;
@@ -39,5 +39,11 @@ private:
 	double elapseUps, elapseFps;
 	std::chrono::steady_clock::time_point now, upsTimer, fpsTimer, secTimer;
 	std::chrono::duration<double> upsSpan, fpsSpan, secSpan;
+
+	TextButton *b1, *b2, *b3, *b4;
+	sf::Vector2f guiScale;
+
+	int c;
+	bool mouseL;
 };
 

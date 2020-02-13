@@ -1,28 +1,26 @@
 #pragma once
-class Button
+#include "GuiItem.h"
+class Button :
+	public GuiItem
 {
 public:
-	Button(int posX, int posY,
-		const char* bname, const sf::Color& textColorIdle, const sf::Color& textColorHover, int charSize, const sf::Font& textFont,
-		sf::Sound& hoverSound, sf::Sound& pressedSound);
+	Button(float x, float y, const char* bname, const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution,
+		const char* hoverSound, const char* pressedSound);
 	virtual ~Button();
 
-	void update(sf::Vector2i mousePosWindow);
-	void render(sf::RenderTarget* target);
+	virtual bool update(int x, int y, bool press);
 
-	void press();
-	const bool getHover() const;
+	virtual void setVolume(float volume);
+protected:
+	sf::FloatRect hitBox;
 
-	const sf::FloatRect getGlobalBounds() const;
+	std::string bname;
 
-private:
-	sf::FloatRect* baseRect;
-	sf::Text text;
-	sf::Color textColorIdle, textColorHover;
+	bool hover, pressed, ponh;
 
-	sf::Sound& hoverSound;
-	sf::Sound& pressedSound;
-
-	bool hover;
+	sf::SoundBuffer* hoverSoundB;
+	sf::SoundBuffer* pressedSoundB;
+	sf::Sound* hoverSound;
+	sf::Sound* pressedSound;
 };
 

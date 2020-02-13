@@ -7,8 +7,8 @@
     <Filter Include="States">
       <UniqueIdentifier>{0bec2927-8fa8-41d5-ac48-0b06f75a93a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Gadgets">
-      <UniqueIdentifier>{929c7cc3-a4c5-4471-8e0a-3b3fa8269f08}</UniqueIdentifier>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{211d5add-7065-42c4-bd21-d0da6746192b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,14 +30,17 @@
     <ClCompile Include="src\MainMenuState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="src\MMSetingsState.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="src\Gui.cpp">
+      <Filter>Gui</Filter>
     </ClCompile>
     <ClCompile Include="src\Button.cpp">
-      <Filter>Gadgets</Filter>
+      <Filter>Gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Selector.cpp">
-      <Filter>Gadgets</Filter>
+    <ClCompile Include="src\GuiItem.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextButton.cpp">
+      <Filter>Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +59,17 @@
     <ClInclude Include="src\MainMenuState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="src\MMSetingsState.h">
-      <Filter>States</Filter>
+    <ClInclude Include="src\Gui.h">
+      <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="src\Button.h">
-      <Filter>Gadgets</Filter>
+      <Filter>Gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Selector.h">
-      <Filter>Gadgets</Filter>
+    <ClInclude Include="src\GuiItem.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextButton.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
