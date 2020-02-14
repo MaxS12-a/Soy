@@ -1,26 +1,21 @@
 #pragma once
 #include "GuiItem.h"
+
 class Button :
 	public GuiItem
 {
 public:
-	Button(float x, float y, const char* bname, const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution,
-		const char* hoverSound, const char* pressedSound);
+	Button(unsigned char gID, float x, float y, const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution,
+		sf::Sound& hoverSound, sf::Sound& pressedSound);
 	virtual ~Button();
 
-	virtual bool update(int x, int y, bool press);
-
-	virtual void setVolume(float volume);
+	virtual bool update(const MouseState& mouseState);
 protected:
 	sf::FloatRect hitBox;
 
-	std::string bname;
+	bool hover;
 
-	bool hover, pressed, ponh;
-
-	sf::SoundBuffer* hoverSoundB;
-	sf::SoundBuffer* pressedSoundB;
-	sf::Sound* hoverSound;
-	sf::Sound* pressedSound;
+	sf::Sound& hoverSound;
+	sf::Sound& pressedSound;
 };
 

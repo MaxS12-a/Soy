@@ -1,21 +1,24 @@
 #pragma once
 #include "Button.h"
+
 class TextButton :
 	public Button
 {
 public:
-	TextButton(float x, float y, const char* bname, 
-		const char* fontFile, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor,
-		const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution, const char* hoverSound, const char* pressedSound);
+	TextButton(unsigned char gID, float x, float y, const std::string& name,
+		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, const sf::Vector2f& guiScale, Corner corner, 
+		const sf::Vector2u& windowResolution, bool goBold, sf::Sound& hoverSound, sf::Sound& pressedSound);
+	virtual ~TextButton();
 
-	bool update(int x, int y , bool press);
+	bool update(const MouseState& mouseState);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	void create(sf::Vector2u windowResolution, sf::Vector2f guiScale);
+	void create(const sf::Vector2u& windowResolution,const sf::Vector2f& guiScale);
 private:
-	sf::Font font;
 	sf::Text text;
 	int charSize;
+	bool goBold;
+	bool colorControl;
 	sf::Color idleColor;
 	sf::Color hoverColor;
 };

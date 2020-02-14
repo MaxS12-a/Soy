@@ -1,13 +1,17 @@
 #include "pch.h"
 #include "GuiItem.h"
 
-GuiItem::GuiItem(float x, float y, const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution)
-	: corner(corner), x(x), y(y)
+GuiItem::GuiItem(unsigned char gID, float x, float y,const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution)
+	: corner(corner), gID(gID), x(x), y(y)
 {
 }
 
 GuiItem::~GuiItem()
 {
+
+}unsigned char GuiItem::getgID()
+{
+	return gID;
 }
 
 std::pair<int, int> GuiItem::getNewOrigin(Corner corner, const std::pair<int, int>& size)

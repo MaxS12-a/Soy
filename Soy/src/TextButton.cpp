@@ -1,36 +1,41 @@
 #include "pch.h"
 #include "TextButton.h"
 
-TextButton::TextButton(float x, float y, const char* bname, 
-	const char* fontFile, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor,
-	const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution,
-	const char* hoverSound = nullptr, const char* pressedSound = nullptr)
-	: Button(x, y , bname, guiScale, corner, windowResolution, hoverSound, pressedSound), charSize(charSize)
+TextButton::TextButton(unsigned char gID, float x, float y, const std::string& name,
+	const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, 
+	const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution, bool goBold,
+	sf::Sound& hoverSound, sf::Sound& pressedSound)
+	: Button(gID, x, y, guiScale, corner, windowResolution, hoverSound, pressedSound), charSize(charSize), goBold(goBold),
+	colorControl(false)
 {
 	this->idleColor = idleColor;
 	this->hoverColor = hoverColor;
 
-	if(!font.loadFromFile(fontFile)) LOG_CRITICAL("Could not load {0}.", fontFile);
-
 	text.setFont(font);
-	text.setString(bname);
+	text.setString(name);
 	text.setFillColor(idleColor);
-	text.setStyle(sf::Text::Regular);
 
 	create(windowResolution, guiScale);
 }
 
-bool TextButton::update(int x, int y, bool press)
+TextButton::~TextButton()
 {
-	if (Button::update(x, y, press)) return true;
+}
 
-	if (hover) {
+bool TextButton::update(const MouseState& mouseState)
+{
+	if (Button::update(mouseState)) return true;
+
+	if (hover && !colorControl) {
+		colorControl = true;
 		text.setFillColor(hoverColor); 
-		text.setStyle(sf::Text::Bold);
-	}
-	else if(text.getStyle() == sf::Text::Bold){
+		if(goBold)
+			text.setStyle(sf::Text::Bold);
+	}else if(!hover && colorControl) {
+		colorControl = false;
 		text.setFillColor(idleColor);
-		text.setStyle(sf::Text::Regular);
+		if(goBold)
+			text.setStyle(sf::Text::Regular);
 	}
 
 	return false;
@@ -42,9 +47,11 @@ void TextButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(text, states);
 }
 
-void TextButton::create(sf::Vector2u windowResolution, sf::Vector2f guiScale)
+void TextButton::create(const sf::Vector2u& windowResolution,const sf::Vector2f& guiScale)
 {
 	setPosition(x/1920*windowResolution.x, y/1080*windowResolution.y);
+
+	std::cout << "Pos: " << getPosition().x << " " << getPosition().y << std::endl;
 
 	text.setCharacterSize(charSize * guiScale.y);
 	text.setPosition(0, 0);

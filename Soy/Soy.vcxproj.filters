@@ -30,16 +30,16 @@
     <ClCompile Include="src\MainMenuState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gui.cpp">
-      <Filter>Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Button.cpp">
-      <Filter>Gui</Filter>
-    </ClCompile>
     <ClCompile Include="src\GuiItem.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
     <ClCompile Include="src\TextButton.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gui.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,16 +59,16 @@
     <ClInclude Include="src\MainMenuState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="src\Gui.h">
-      <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Button.h">
-      <Filter>Gui</Filter>
-    </ClInclude>
     <ClInclude Include="src\GuiItem.h">
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="src\TextButton.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gui.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

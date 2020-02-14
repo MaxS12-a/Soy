@@ -1,6 +1,7 @@
 #pragma once
 #include "MainMenuState.h"
 #include "TextButton.h"
+#include "Gui.h"
 
 class Game
 {
@@ -39,11 +40,5 @@ private:
 	double elapseUps, elapseFps;
 	std::chrono::steady_clock::time_point now, upsTimer, fpsTimer, secTimer;
 	std::chrono::duration<double> upsSpan, fpsSpan, secSpan;
-
-	TextButton *b1, *b2, *b3, *b4;
-	sf::Vector2f guiScale;
-
-	int c;
-	bool mouseL;
 };
 
