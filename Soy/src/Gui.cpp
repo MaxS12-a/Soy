@@ -7,7 +7,7 @@ Gui::Gui()
 
 Gui::~Gui()
 {
-	for (auto i : guiItems) delete i;
+	for (auto i : guiItems) delete i.second;
 
 	for (auto i : sounds) {
 		delete i.second.first;
@@ -19,21 +19,26 @@ unsigned char Gui::update(const MouseState& mouseState)
 {
 	ret = 0;
 
-	for (auto i : guiItems) 
-		if (i->update(mouseState))
-			ret = i->getgID();
+	for (auto i : guiItems)
+		if (i.second->update(mouseState))
+			ret = i.first;
 
 	return ret;
 }
 
-void Gui::render(sf::RenderTarget* target)
+unsigned char Gui::update()
 {
-	for (auto i : guiItems) target->draw(*i);
+	return 0;
 }
 
-void Gui::addGuiItem(GuiItem* guiItem)
+void Gui::render(sf::RenderTarget* target)
 {
-	guiItems.push_back(guiItem);
+	for (auto i : guiItems) target->draw(*i.second);
+}
+
+void Gui::addGuiItem(int id, GuiItem* guiItem)
+{
+	guiItems[id] = guiItem;
 }
 
 void Gui::addSound(const std::string& soundName, const std::string& soundFile)
@@ -64,7 +69,17 @@ sf::Font& Gui::getFont(const std::string& fontName)
 	return fonts[fontName];
 }
 
+GuiItem* Gui::getItem(unsigned char id)
+{
+	return guiItems[id];
+}
+
+void Gui::removeItem(unsigned char id)
+{
+	guiItems.erase(id);
+}
+
 void Gui::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
 {
-	for (auto i : guiItems) i->create(windowResolution, guiScale);
+	for (auto i : guiItems) i.second->create(windowResolution, guiScale);
 }

@@ -5,7 +5,7 @@
 Game::Game()
     : ups(0), fps(0), secondsRunning(0)
 {
-    window.create(sf::VideoMode::getDesktopMode(), "SFML WORKS!", sf::Style::Fullscreen);
+    window.create(sf::VideoMode(1920,1080), "Soy", sf::Style::None);
 
     stateStuff = new StateStuff({ this, &window, window.getSize(), { 1,1 }, StateStuff::Volumes(50,50)});
     stateStack.push(new MainMenuState(stateStuff));
@@ -55,7 +55,7 @@ void Game::run() {
             lups = 0;
             lfps = 0;
             secTimer = now;
-            LOG_TRACE("UPS/FPS: {0}/{1} | Seconds running = {2}s", ups, fps, secondsRunning);
+            //LOG_TRACE("UPS/FPS: {0}/{1} | Seconds running = {2}s", ups, fps, secondsRunning);
         }
     }
 }

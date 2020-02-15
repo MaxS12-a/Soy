@@ -1,50 +1,24 @@
 #include "pch.h"
 #include "GuiItem.h"
 
-GuiItem::GuiItem(unsigned char gID, float x, float y,const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution)
-	: corner(corner), gID(gID), x(x), y(y)
+GuiItem::GuiItem(float x, float y,const sf::Vector2f& guiScale, const sf::Vector2f& origin, const sf::Vector2u& windowResolution)
+	: origin(origin),  x(x), y(y), guiScale(guiScale), windowResolution(windowResolution)
 {
 }
 
 GuiItem::~GuiItem()
 {
 
-}unsigned char GuiItem::getgID()
+}
+bool GuiItem::update(const MouseState& mouseState){	return false; }
+bool GuiItem::update(){	return false; }
+
+void* GuiItem::getInfo()
 {
-	return gID;
+	return nullptr;
 }
 
-std::pair<int, int> GuiItem::getNewOrigin(Corner corner, const std::pair<int, int>& size)
+std::pair<int, int> GuiItem::getNewOrigin(sf::Vector2f& origin, const std::pair<int, int>& size)
 {
-	switch (corner) {
-	case Corner::TopLeft:
-		return std::pair<int, int>(0, 0);
-		break;
-	case Corner::Top:
-		return std::pair<int, int>(size.first/2, 0);
-		break;
-	case Corner::TopRight:
-		return std::pair<int, int>(size.first, 0);
-		break;
-	case Corner::Left:
-		return std::pair<int, int>(0, size.second/2);
-		break;
-	case Corner::Center:
-		return std::pair<int, int>(size.first/2, size.second/2);
-		break;
-	case Corner::Right:
-		return std::pair<int, int>(size.first, size.second/2);
-		break;
-	case Corner::BottomLeft:
-		return std::pair<int, int>(0, size.second);
-		break;
-	case Corner::Bottom:
-		return std::pair<int, int>(size.first / 2, size.second);
-		break;
-	case Corner::BottomRight:
-		return std::pair<int, int>(size.first, size.second);
-		break;
-	default:
-		return std::pair<int, int>(0, 0);
-	}
+	return std::pair<int, int>(size.first*origin.x, size.second*origin.y);
 }

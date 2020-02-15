@@ -17,5 +17,7 @@ private:
 	Gui gui;
 
 	unsigned char selectedButton;
+
+	std::vector<std::string>* videoModes;
 };
 

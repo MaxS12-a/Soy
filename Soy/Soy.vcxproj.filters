@@ -10,6 +10,15 @@
     <Filter Include="Gui">
       <UniqueIdentifier>{211d5add-7065-42c4-bd21-d0da6746192b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gui\Headers">
+      <UniqueIdentifier>{2e09a688-5a98-4462-b05f-6206e9a9e48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Headers">
+      <UniqueIdentifier>{e5cc12e8-8244-4852-a6cb-80d12fce6eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Headers">
+      <UniqueIdentifier>{20e8c2de-d7f7-45e0-bb4a-6155e9615bba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Soy.cpp">
@@ -42,34 +51,46 @@
     <ClCompile Include="src\Button.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Selector.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteButton.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\pch.h">
-      <Filter>Base</Filter>
+    <ClInclude Include="src\TextButton.h">
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Log.h">
-      <Filter>Base</Filter>
+    <ClInclude Include="src\SpriteButton.h">
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="src\State.h">
-      <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MainMenuState.h">
-      <Filter>States</Filter>
+    <ClInclude Include="src\Selector.h">
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\GuiItem.h">
-      <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TextButton.h">
-      <Filter>Gui</Filter>
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\Gui.h">
-      <Filter>Gui</Filter>
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\Button.h">
-      <Filter>Gui</Filter>
+      <Filter>Gui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainMenuState.h">
+      <Filter>States\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State.h">
+      <Filter>States\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Base\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Log.h">
+      <Filter>Base\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Base\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

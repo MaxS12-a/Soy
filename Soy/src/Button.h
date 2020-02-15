@@ -5,7 +5,7 @@ class Button :
 	public GuiItem
 {
 public:
-	Button(unsigned char gID, float x, float y, const sf::Vector2f& guiScale, Corner corner, const sf::Vector2u& windowResolution,
+	Button(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2f& origin, const sf::Vector2u& windowResolution,
 		sf::Sound& hoverSound, sf::Sound& pressedSound);
 	virtual ~Button();
 

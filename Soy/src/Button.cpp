@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Button.h"
 
-Button::Button(unsigned char gID, float x, float y,  const sf::Vector2f& guiScale, Corner corner,
+Button::Button(float x, float y,  const sf::Vector2f& guiScale, const sf::Vector2f& origin,
 	const sf::Vector2u& windowResolution, sf::Sound& hoverSound, sf::Sound& pressedSound)
-	: GuiItem(gID, x, y, guiScale, corner, windowResolution), hoverSound(hoverSound),pressedSound(pressedSound)
+	: GuiItem(x, y, guiScale, origin, windowResolution), hoverSound(hoverSound),pressedSound(pressedSound)
 {
 }
 
