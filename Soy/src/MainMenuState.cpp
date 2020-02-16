@@ -66,13 +66,17 @@ MainMenuState::MainMenuState(StateStuff* stateStuff)
 		videoModes->push_back(std::string(std::to_string(modes[i].width) + "x" + std::to_string(modes[i].height)));
 
 	gui.addGuiItem(10, new Selector(
-		this->stateStuff->window->getSize().x / 2, this->stateStuff->window->getSize().y / 4 + 400,
+		this->stateStuff->windowSize.x / 2, this->stateStuff->windowSize.y / 4 + 500,
 		this->stateStuff->guiScale, {0.5, 0.5}, this->stateStuff->windowSize, gui.getFont("Winter flakes"),
 		75, sf::Color::White, sf::Color::Yellow, 
 		true, "Resources/Images/Button-Blank-Red-icon.png", "Resources/Images/Button-Blank-Gray-icon.png", {1.15, 1.15},
 		gui.getSound("ButtonHoverSound"), gui.getSound("ButtonPressedSound"),
 		gui.getSound("ButtonHoverSound"), gui.getSound("ButtonPressedSound"),
-		200, videoModes, 0));
+		275, videoModes, 0));
+
+	gui.addGuiItem(11, new GuiSprite(this->stateStuff->windowSize.x / 2, 100, "Resources/Images/Sveknider.png", this->stateStuff->guiScale,
+		{0.5, 0.5}, this->stateStuff->windowSize));
+
 
 	gui.setVolume(stateStuff->volumes.guiVol);
 }
@@ -134,7 +138,15 @@ void MainMenuState::update()
 		gui.create(this->stateStuff->windowSize, this->stateStuff->guiScale);
 	}
 	if (selectedButton == 10) {
-		std::cout << "!!:" <<  *((std::string*)gui.getItem(10)->getInfo()) << std::endl;
+		std::string* aux = (std::string*)gui.getItem(10)->getInfo();
+		std::istringstream f(*aux);
+		delete aux;
+		std::string s1, s2;
+		std::getline(f, s1, 'x');
+		std::getline(f, s2, '\0');
+		stateStuff->window->create(sf::VideoMode(std::stoi(s1), std::stoi(s2)), "SF", sf::Style::Close | sf::Style::Titlebar);
+		stateStuff->windowSize = stateStuff->window->getSize();
+		gui.create(this->stateStuff->windowSize, this->stateStuff->guiScale);
 	}
 }
 

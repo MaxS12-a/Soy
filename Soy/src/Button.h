@@ -9,6 +9,9 @@ public:
 		sf::Sound& hoverSound, sf::Sound& pressedSound);
 	virtual ~Button();
 
+	virtual void doHitBox() = 0;
+	virtual void moveHitBox(float x, float y);
+
 	virtual bool update(const MouseState& mouseState);
 protected:
 	sf::FloatRect hitBox;

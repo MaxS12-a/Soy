@@ -20,8 +20,6 @@ SpriteButton::SpriteButton(float x, float y,
 
 	sprite.setTexture(*idleTexture);
 
-	idleTexture->setSmooth(true);
-
 	create(windowResolution, guiScale);
 }
 
@@ -33,11 +31,15 @@ SpriteButton::~SpriteButton()
 
 bool SpriteButton::update(const MouseState& mouseState)
 {
-	if (Button::update(mouseState)) {
-		if(pressedTexture)
-			sprite.setTexture(*pressedTexture);
-
+	if (Button::update(mouseState))
 		return true;
+
+	if (pressedTexture) {
+		if (hover && mouseState.mousePressedLeft) {
+			if (sprite.getTexture() == idleTexture)
+				sprite.setTexture(*pressedTexture);
+		}
+		else if (sprite.getTexture() == pressedTexture) sprite.setTexture(*idleTexture);
 	}
 
 	if (scaleOnHover.x != 1 || scaleOnHover.y != 1) {
@@ -59,6 +61,12 @@ void SpriteButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(sprite, states);
 }
 
+void SpriteButton::doHitBox() {
+	hitBox = sprite.getGlobalBounds();
+	hitBox.left += getPosition().x;
+	hitBox.top += getPosition().y;
+}
+
 void SpriteButton::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
 {
 	this->guiScale = guiScale;
@@ -71,7 +79,5 @@ void SpriteButton::create(const sf::Vector2u& windowResolution, const sf::Vector
 	sprite.setOrigin(newOrigin.first, newOrigin.second);
 	sprite.setScale(guiScale);
 
-	hitBox = sprite.getGlobalBounds();
-	hitBox.left += getPosition().x;
-	hitBox.top += getPosition().y;
+	doHitBox();
 }

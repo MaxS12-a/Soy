@@ -57,6 +57,9 @@
     <ClCompile Include="src\SpriteButton.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\GuiSprite.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TextButton.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="src\Game.h">
       <Filter>Base\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GuiSprite.h">
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

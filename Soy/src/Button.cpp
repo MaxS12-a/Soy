@@ -11,6 +11,12 @@ Button::~Button()
 {
 }
 
+void Button::moveHitBox(float x, float y)
+{
+	hitBox.left += x;
+	hitBox.top += y;
+}
+
 bool Button::update(const MouseState& mouseState)
 {
 	if (hitBox.contains(mouseState.mousePosWindow.x, mouseState.mousePosWindow.y)) {

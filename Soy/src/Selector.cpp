@@ -7,18 +7,17 @@ Selector::Selector(float x, float y, const sf::Vector2f& guiScale, const sf::Vec
 	sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons, int distCenterToCenter, std::vector<std::string>* options, int baseOption)
 	:GuiItem(x, y, guiScale, origin, windowResolution), options(options), option(baseOption), distCenterToCenter(distCenterToCenter)
 {
-	text = new TextButton(0, 0, (*options)[baseOption], font, charSize, idleColor, hoverColor, guiScale, origin, 
+	text = new TextButton(0, 0, (*options)[baseOption], font, charSize, idleColor, hoverColor, guiScale, { 0.5, 0.5 },
 		windowResolution, goBold, hoverSoundText, pressedSoundText);
 
-	buttonL = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, origin, 
+	buttonL = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, {0.5, 0.5},
 		windowResolution, hoverSoundButtons, pressedSoundButtons, scaleOnHover);
-	buttonL->setPosition(-distCenterToCenter * guiScale.x, 0);
-	buttonR = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, origin,
+
+	buttonR = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, { 0.5, 0.5 },
 		windowResolution, hoverSoundButtons, pressedSoundButtons, scaleOnHover);
-	buttonL->setPosition(distCenterToCenter * guiScale.x, 0);
 	buttonR->setRotation(180);
 
-	setPosition(x, y);
+	create(windowResolution, guiScale);
 }
 
 Selector::~Selector()
@@ -34,11 +33,13 @@ bool Selector::update(const MouseState& mouseState)
 		option--;
 		if (option == -1) option = options->size() - 1;
 		text->setString((*options)[option]);
+		text->moveHitBox(getPosition().x, getPosition().y);
 	}
 	if (buttonR->update(mouseState)) {
 		option++;
 		if (option == options->size()) option = 0;
 		text->setString((*options)[option]);
+		text->moveHitBox(getPosition().x, getPosition().y);
 	}
 	if (text->update(mouseState)) return true;
 
@@ -65,10 +66,16 @@ void Selector::create(const sf::Vector2u& windowResolution, const sf::Vector2f& 
 	buttonR->create(windowResolution, guiScale);
 
 	buttonL->setPosition(-distCenterToCenter * guiScale.x, 0);
+	buttonL->doHitBox();
 	buttonR->setPosition(distCenterToCenter * guiScale.x, 0);
+	buttonR->doHitBox();
+
+	text->moveHitBox(getPosition().x, getPosition().y);
+	buttonL->moveHitBox(getPosition().x, getPosition().y);
+	buttonR->moveHitBox(getPosition().x, getPosition().y);
 }
 
 void* Selector::getInfo()
 {
-	return (void*)&options[option];
+	return (void*)new std::string((*options)[option]);
 }

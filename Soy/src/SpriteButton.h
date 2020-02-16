@@ -13,6 +13,8 @@ public:
 	bool update(const MouseState& mouseState);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	void doHitBox();
+
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 private:
 	sf::Texture* idleTexture;

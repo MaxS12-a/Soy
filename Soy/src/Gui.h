@@ -1,7 +1,6 @@
 #pragma once
-#include "SpriteButton.h"
-#include "TextButton.h"
 #include "Selector.h"
+#include "GuiSprite.h"
 
 class Gui
 {

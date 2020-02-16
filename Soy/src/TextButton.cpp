@@ -47,6 +47,12 @@ void TextButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(text, states);
 }
 
+void TextButton::doHitBox() {
+	hitBox = text.getGlobalBounds();
+	hitBox.left += getPosition().x;
+	hitBox.top += getPosition().y;
+}
+
 void TextButton::setString(const std::string& newString)
 {
 	text.setString(newString);
@@ -67,7 +73,5 @@ void TextButton::create(const sf::Vector2u& windowResolution,const sf::Vector2f&
 	std::pair<int, int> newOrigin = getNewOrigin(origin, std::pair<int, int>(text.getGlobalBounds().width, text.getGlobalBounds().height));
 	text.setOrigin(newOrigin.first, newOrigin.second);
 
-	hitBox = text.getGlobalBounds();
-	hitBox.left += getPosition().x;
-	hitBox.top += getPosition().y;
+	doHitBox();
 }
