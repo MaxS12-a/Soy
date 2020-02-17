@@ -10,6 +10,8 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	const sf::FloatRect& getGlobalBounds();
+
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 private:
 	sf::Texture* texture;

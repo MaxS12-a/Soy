@@ -12,7 +12,12 @@ public:
 
 	virtual void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale) = 0;
 
+	virtual void moveHitBox(float x, float y);
+
 	virtual void* getInfo();
+	virtual const sf::Vector2f& getOrigin();
+	virtual const sf::Vector2f& getBasePosition();
+	virtual const sf::FloatRect& getGlobalBounds() = 0;
 
 	static std::pair<int, int> getNewOrigin(sf::Vector2f& origin, const std::pair<int, int>& size);
 protected:

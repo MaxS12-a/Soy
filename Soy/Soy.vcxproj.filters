@@ -60,6 +60,9 @@
     <ClCompile Include="src\GuiSprite.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\GuiContainer.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TextButton.h">
@@ -96,6 +99,9 @@
       <Filter>Base\Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\GuiSprite.h">
+      <Filter>Gui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GuiContainer.h">
       <Filter>Gui\Headers</Filter>
     </ClInclude>
   </ItemGroup>

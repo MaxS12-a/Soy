@@ -6,7 +6,7 @@ class Selector :
 	public GuiItem
 {
 public:
-	Selector(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2f& origin, const sf::Vector2u& windowResolution,
+	Selector(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2u& windowResolution,
 		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold,
 		const std::string& idleTextureFile, const std::string& pressedTextureFile, const sf::Vector2f& scaleOnHover,
 		sf::Sound& hoverSoundText, sf::Sound& pressedSoundText, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons,
@@ -18,6 +18,9 @@ public:
 
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 
+	void moveHitBox(float x, float y);
+	const sf::FloatRect& getGlobalBounds();
+
 	void* getInfo();
 
 private:
@@ -27,5 +30,6 @@ private:
 	std::vector<std::string>* options;
 	int option;
 	int distCenterToCenter;
+	sf::Vector2f hitBoxPos;
 };
 

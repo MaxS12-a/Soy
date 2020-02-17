@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GuiContainer.cpp" />
     <ClCompile Include="src\GuiSprite.cpp" />
     <ClCompile Include="src\SpriteButton.cpp" />
     <ClCompile Include="src\Selector.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="src\TextButton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GuiContainer.h" />
     <ClInclude Include="src\GuiSprite.h" />
     <ClInclude Include="src\SpriteButton.h" />
     <ClInclude Include="src\Selector.h" />

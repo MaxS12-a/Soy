@@ -19,5 +19,8 @@ private:
 	unsigned char selectedButton;
 
 	std::vector<std::string>* videoModes;
+
+	GuiItem* g;
+	bool gc;
 };
 

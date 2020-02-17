@@ -24,6 +24,11 @@ void GuiSprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(sprite, states);
 }
 
+const sf::FloatRect& GuiSprite::getGlobalBounds()
+{
+	return sf::FloatRect(getPosition(), {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height});
+}
+
 void GuiSprite::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
 {
 	this->guiScale = guiScale;

@@ -67,6 +67,11 @@ void SpriteButton::doHitBox() {
 	hitBox.top += getPosition().y;
 }
 
+const sf::FloatRect& SpriteButton::getGlobalBounds()
+{
+	return hitBox;
+}
+
 void SpriteButton::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
 {
 	this->guiScale = guiScale;

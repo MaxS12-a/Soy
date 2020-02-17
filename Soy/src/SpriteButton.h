@@ -15,6 +15,8 @@ public:
 
 	void doHitBox();
 
+	const sf::FloatRect& getGlobalBounds();
+
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 private:
 	sf::Texture* idleTexture;

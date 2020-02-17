@@ -53,6 +53,11 @@ void TextButton::doHitBox() {
 	hitBox.top += getPosition().y;
 }
 
+const sf::FloatRect& TextButton::getGlobalBounds()
+{
+	return hitBox;
+}
+
 void TextButton::setString(const std::string& newString)
 {
 	text.setString(newString);

@@ -1,6 +1,7 @@
 #pragma once
 #include "Selector.h"
 #include "GuiSprite.h"
+#include "GuiContainer.h"
 
 class Gui
 {
