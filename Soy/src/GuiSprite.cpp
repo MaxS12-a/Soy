@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "GuiSprite.h"
 
-GuiSprite::GuiSprite(float x, float y, const std::string& textureFile, const sf::Vector2f& guiScale, 
-	const sf::Vector2f& origin, const sf::Vector2u& windowResolution)
-	: GuiItem(x, y, guiScale, origin, windowResolution) 
+// Constructos & destructors
+GuiSprite::GuiSprite(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
+	const std::string& textureFile)
+	: GuiItem(x, y, origin, windowResolution, guiScale)
 {
 	texture = new sf::Texture();
 	if (!texture->loadFromFile(textureFile)) LOG_CRITICAL("Could not load {0}", textureFile);
@@ -18,15 +19,11 @@ GuiSprite::~GuiSprite()
 	delete texture;
 }
 
+// GL methods
 void GuiSprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(sprite, states);
-}
-
-const sf::FloatRect& GuiSprite::getGlobalBounds()
-{
-	return sf::FloatRect(getPosition(), {sprite.getGlobalBounds().width, sprite.getGlobalBounds().height});
 }
 
 void GuiSprite::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
@@ -39,5 +36,11 @@ void GuiSprite::create(const sf::Vector2u& windowResolution, const sf::Vector2f&
 	std::pair<int, int> newOrigin = getNewOrigin(origin,
 		std::pair<int, int>(sprite.getTexture()->getSize().x, sprite.getTexture()->getSize().y));
 	sprite.setOrigin(newOrigin.first, newOrigin.second);
-	sprite.setScale(guiScale);
+	sprite.setScale(guiScale.x * windowResolution.x / 1920 , guiScale.y * windowResolution.y / 1080);
+}
+
+// Specific methods
+const sf::FloatRect& GuiSprite::getGlobalBounds()
+{
+	return sf::FloatRect(getPosition(), { sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
 }

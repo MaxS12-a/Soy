@@ -1,26 +1,29 @@
 #pragma once
 #include "Button.h"
 
+// A button w a sprite that scale on hover
 class SpriteButton :
 	public Button
 {
 public:
-	SpriteButton(float x, float y, const std::string& idleTextureFile, const std::string& pressedTextureFile, 
-		const sf::Vector2f& guiScale, const sf::Vector2f& origin, const sf::Vector2u& windowResolution,
-		sf::Sound& hoverSound, sf::Sound& pressedSound, const sf::Vector2f& scaleOnHover);
+	// Constructors & destructors
+	SpriteButton(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
+		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSound, sf::Sound& pressedSound);
 	virtual ~SpriteButton();
 
+	// GL methods
 	bool update(const MouseState& mouseState);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
+
+	// Specific methods
 	void doHitBox();
 
 	const sf::FloatRect& getGlobalBounds();
-
-	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
+	
 private:
 	sf::Texture* idleTexture;
-	sf::Texture* pressedTexture;
 	sf::Sprite sprite;
 	
 	sf::Vector2f scaleOnHover;

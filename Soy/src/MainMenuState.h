@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "Gui.h"
+#include "Background.h"
 
 class MainMenuState : public State
 {
@@ -15,12 +16,12 @@ public:
 	void resumeState();
 private:
 	Gui gui;
-
-	unsigned char selectedButton;
+	int selectedObject;
 
 	std::vector<std::string>* videoModes;
 
-	GuiItem* g;
-	bool gc;
+	sf::Music* mmMusic;
+
+	BGMovSprite* bgmovsprite;
 };
 

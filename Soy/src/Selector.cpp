@@ -1,20 +1,24 @@
 #include "pch.h"
 #include "Selector.h"
 
-Selector::Selector(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2u& windowResolution, 
-	const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold, const std::string& idleTextureFile, 
-	const std::string& pressedTextureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSoundText, sf::Sound& pressedSoundText, 
-	sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons, int distCenterToCenter, std::vector<std::string>* options, int baseOption)
-	:GuiItem(x, y, guiScale, { 0.5, 0.5 }, windowResolution), options(options), option(baseOption), distCenterToCenter(distCenterToCenter), hitBoxPos({ 0,0 })
+// Constructors & destructors
+Selector::Selector(float x, float y, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
+	int distCenterToCenter, std::vector<std::string>* options, int baseOption,
+	/* Text */
+	const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold, sf::Sound& hoverSoundText, sf::Sound& pressedSoundText,
+	/* Arrows */
+	const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons)
+	:GuiItem(x, y, { 0.5, 0.5 }, windowResolution,  guiScale), options(options), option(baseOption), distCenterToCenter(distCenterToCenter), hitBoxPos({ 0,0 })
 {
-	text = new TextButton(0, 0, (*options)[baseOption], font, charSize, idleColor, hoverColor, guiScale, { 0.5, 0.5 },
-		windowResolution, goBold, hoverSoundText, pressedSoundText);
+	text = new TextButton(0, 0, { 0.5, 0.5 }, windowResolution, guiScale, 
+		(*options)[baseOption], font, charSize, idleColor, hoverColor,
+		goBold, hoverSoundText, pressedSoundText);
 
-	buttonL = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, {0.5, 0.5},
-		windowResolution, hoverSoundButtons, pressedSoundButtons, scaleOnHover);
+	buttonL = new SpriteButton(0, 0, {0.5, 0.5}, windowResolution, guiScale,
+		textureFile, scaleOnHover, hoverSoundButtons, pressedSoundButtons);
 
-	buttonR = new SpriteButton(0, 0, idleTextureFile, pressedTextureFile, guiScale, { 0.5, 0.5 },
-		windowResolution, hoverSoundButtons, pressedSoundButtons, scaleOnHover);
+	buttonR = new SpriteButton(0, 0, {0.5, 0.5}, windowResolution, guiScale,
+		textureFile, scaleOnHover, hoverSoundButtons, pressedSoundButtons);
 	buttonR->setRotation(180);
 
 	create(windowResolution, guiScale);
@@ -27,6 +31,7 @@ Selector::~Selector()
 	delete buttonR;
 }
 
+// GL methods
 bool Selector::update(const MouseState& mouseState)
 {
 	if (buttonL->update(mouseState)) {
@@ -73,6 +78,7 @@ void Selector::create(const sf::Vector2u& windowResolution, const sf::Vector2f& 
 	moveHitBox(getPosition().x, getPosition().y);
 }
 
+// Specific methods
 void Selector::moveHitBox(float x, float y) 
 {	
 	text->moveHitBox(x, y);

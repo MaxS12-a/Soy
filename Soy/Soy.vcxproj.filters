@@ -19,6 +19,12 @@
     <Filter Include="Base\Headers">
       <UniqueIdentifier>{20e8c2de-d7f7-45e0-bb4a-6155e9615bba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Background">
+      <UniqueIdentifier>{12d99245-2613-4c81-8f03-6e5d3bf0b45a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Background\Headers">
+      <UniqueIdentifier>{66d98140-c444-4fb9-965f-f416a0d31f96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Soy.cpp">
@@ -63,6 +69,12 @@
     <ClCompile Include="src\GuiContainer.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Background.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BGMovSprite.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TextButton.h">
@@ -103,6 +115,12 @@
     </ClInclude>
     <ClInclude Include="src\GuiContainer.h">
       <Filter>Gui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Background.h">
+      <Filter>Background\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BGMovSprite.h">
+      <Filter>Background\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "GuiContainer.h"
 
-GuiContainer::GuiContainer(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2u& windowResolution,
+// Constructos & destructors
+GuiContainer::GuiContainer(float x, float y, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
 	int distItI)
-	: GuiItem(x, y, guiScale, { 0.5, 0.5 }, windowResolution), distItI(distItI)
+	: GuiItem(x, y, { 0.5, 0.5 }, windowResolution, guiScale), distItI(distItI)
 {
 	create(windowResolution, guiScale);
 }
@@ -14,6 +15,7 @@ GuiContainer::~GuiContainer()
 		delete i.second;
 }
 
+// GL methods
 bool GuiContainer::update(const MouseState& mouseState)
 {
 	selected = -1;
@@ -26,6 +28,13 @@ bool GuiContainer::update(const MouseState& mouseState)
 	}
 	if (selected != -1) return true;
 	return false;
+}
+
+void GuiContainer::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	states.transform *= getTransform();
+	for (auto i : items)
+		target.draw(*i.second, states);
 }
 
 void GuiContainer::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
@@ -46,13 +55,7 @@ void GuiContainer::create(const sf::Vector2u& windowResolution, const sf::Vector
 	}
 }
 
-void GuiContainer::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	states.transform *= getTransform();
-	for (auto i : items)
-		target.draw(*i.second, states);
-}
-
+// Specific methods
 const sf::FloatRect& GuiContainer::getGlobalBounds() {
 	
 	int a = 0, s = 0, f = -1, l = 0;
@@ -71,6 +74,7 @@ const sf::FloatRect& GuiContainer::getGlobalBounds() {
 	return ret;
 }
 
+// Item handlers
 void GuiContainer::addItem(int key, GuiItem* item)
 {
 	items[key] = item;

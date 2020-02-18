@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Button.h"
 
-Button::Button(float x, float y,  const sf::Vector2f& guiScale, const sf::Vector2f& origin,
-	const sf::Vector2u& windowResolution, sf::Sound& hoverSound, sf::Sound& pressedSound)
-	: GuiItem(x, y, guiScale, origin, windowResolution), hoverSound(hoverSound),pressedSound(pressedSound)
+// Constructors & destructors
+Button::Button(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
+	sf::Sound& hoverSound, sf::Sound& pressedSound)
+	: GuiItem(x, y, origin, windowResolution, guiScale), hoverSound(hoverSound),pressedSound(pressedSound)
 {
 }
 
@@ -11,6 +12,7 @@ Button::~Button()
 {
 }
 
+// Methods
 void Button::moveHitBox(float x, float y)
 {
 	hitBox.left += x;

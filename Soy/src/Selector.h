@@ -2,22 +2,27 @@
 #include "TextButton.h"
 #include "SpriteButton.h"
 
+// A text, one RArrow and a LArrow. When one arrow get pressed the text changes. When the text is pressed return the string on it.
 class Selector :
 	public GuiItem
 {
 public:
-	Selector(float x, float y, const sf::Vector2f& guiScale, const sf::Vector2u& windowResolution,
-		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold,
-		const std::string& idleTextureFile, const std::string& pressedTextureFile, const sf::Vector2f& scaleOnHover,
-		sf::Sound& hoverSoundText, sf::Sound& pressedSoundText, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons,
-		int distCenterToCenter, std::vector<std::string>* options, int baseOption);
+	// Constructors & destructors
+	Selector(float x, float y, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
+		int distCenterToCenter, std::vector<std::string>* options, int baseOption,
+		/* Text */
+		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold, sf::Sound& hoverSoundText, sf::Sound& pressedSoundText,
+		/* Arrows */
+		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons);
 	virtual ~Selector();
 
+	// GL methods
 	bool update(const MouseState& mouseState);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 
+	// Specific methods
 	void moveHitBox(float x, float y);
 	const sf::FloatRect& getGlobalBounds();
 

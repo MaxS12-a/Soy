@@ -5,7 +5,7 @@
 Game::Game()
     : ups(0), fps(0), secondsRunning(0)
 {
-    window.create(sf::VideoMode(1920,1080), "Soy", sf::Style::None);
+    window.create(sf::VideoMode(1920, 1080), "Soy", sf::Style::None);
 
     stateStuff = new StateStuff({ this, &window, window.getSize(), { 1,1 }, StateStuff::Volumes(50,50)});
     stateStack.push(new MainMenuState(stateStuff));
