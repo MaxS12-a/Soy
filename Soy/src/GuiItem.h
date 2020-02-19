@@ -36,5 +36,7 @@ protected:
 	unsigned char gID;
 	sf::Vector2f guiScale;
 	sf::Vector2u windowResolution;
+
+	sf::FloatRect globalBounds;
 };
 

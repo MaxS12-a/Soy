@@ -8,7 +8,7 @@ class SpriteButton :
 public:
 	// Constructors & destructors
 	SpriteButton(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
-		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSound, sf::Sound& pressedSound);
+		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound* hoverSound, sf::Sound* pressedSound);
 	virtual ~SpriteButton();
 
 	// GL methods
@@ -20,13 +20,17 @@ public:
 	// Specific methods
 	void doHitBox();
 
+	void addTexture(const std::string& textureFile);
+	void setTexture(int pos);
+	const int getActualTexture();
+
 	const sf::FloatRect& getGlobalBounds();
 	
 private:
-	sf::Texture* idleTexture;
+	std::vector<sf::Texture*> textures;
+	int actualTexture;
 	sf::Sprite sprite;
 	
 	sf::Vector2f scaleOnHover;
-	sf::Vector2f guiScale;
 };
 

@@ -68,10 +68,10 @@ const sf::FloatRect& GuiContainer::getGlobalBounds() {
 		}
 	}
 
-	sf::FloatRect ret(sf::Vector2f({ items[s]->getGlobalBounds().left, items[f]->getGlobalBounds().top }),
+	globalBounds = sf::FloatRect(sf::Vector2f({ items[s]->getGlobalBounds().left, items[f]->getGlobalBounds().top }),
 		sf::Vector2f({ items[s]->getGlobalBounds().width, items[l]->getGlobalBounds().top + items[l]->getGlobalBounds().height - items[f]->getGlobalBounds().top }));
 
-	return ret;
+	return globalBounds;
 }
 
 // Item handlers

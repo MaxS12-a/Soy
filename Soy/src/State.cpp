@@ -35,3 +35,36 @@ void State::updateMouse()
 
 
 }
+
+
+StateStuff::Volumes::Volumes(bool muted, float musicVol, float guiVol)
+	:muted(muted), musicVol(musicVol), guiVol(guiVol)
+{
+}
+
+// StateStuff::Volumes
+void StateStuff::Volumes::mute() {
+	this->muted = !muted;
+	if (muted) {
+		musicVolUM = musicVol;
+		guiVolUM = guiVol;
+		musicVol = 0;
+		guiVol = 0;
+	}
+	else {
+		musicVol = musicVolUM;
+		guiVol = guiVolUM;
+	}
+}
+
+void StateStuff::Volumes::increaseMusicVol(float vol) {
+	musicVol += vol;
+	if (musicVol >= 100) musicVol = 100;
+	else if (musicVol <= 0) musicVol = 0;
+}
+
+void StateStuff::Volumes::increaseGuiVol(float vol) {
+	guiVol += vol;
+	if (guiVol >= 100) guiVol = 100;
+	else if (guiVol <= 0) guiVol = 0;
+}

@@ -8,12 +8,12 @@ class Selector :
 {
 public:
 	// Constructors & destructors
-	Selector(float x, float y, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
-		int distCenterToCenter, std::vector<std::string>* options, int baseOption,
+	Selector(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
+		int distItI, std::vector<std::string>* options, int baseOption,
 		/* Text */
-		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold, sf::Sound& hoverSoundText, sf::Sound& pressedSoundText,
+		const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, const sf::Color& outlineColor, int outlineThickness, sf::Sound* hoverSoundText, sf::Sound* pressedSoundText,
 		/* Arrows */
-		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons);
+		const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound* hoverSoundButtons, sf::Sound* pressedSoundButtons);
 	virtual ~Selector();
 
 	// GL methods
@@ -23,6 +23,8 @@ public:
 	void create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale);
 
 	// Specific methods
+	void doButtons();
+
 	void moveHitBox(float x, float y);
 	const sf::FloatRect& getGlobalBounds();
 
@@ -34,7 +36,7 @@ private:
 	SpriteButton* buttonR;
 	std::vector<std::string>* options;
 	int option;
-	int distCenterToCenter;
+	int distItI;
 	sf::Vector2f hitBoxPos;
 };
 

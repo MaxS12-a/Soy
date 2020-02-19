@@ -75,6 +75,9 @@
     <ClCompile Include="src\BGMovSprite.cpp">
       <Filter>Background</Filter>
     </ClCompile>
+    <ClCompile Include="src\MMSettingsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TextButton.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="src\BGMovSprite.h">
       <Filter>Background\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MMSettingsState.h">
+      <Filter>States\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

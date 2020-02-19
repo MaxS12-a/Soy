@@ -2,22 +2,22 @@
 #include "Selector.h"
 
 // Constructors & destructors
-Selector::Selector(float x, float y, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
-	int distCenterToCenter, std::vector<std::string>* options, int baseOption,
+Selector::Selector(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
+	int distItI, std::vector<std::string>* options, int baseOption,
 	/* Text */
-	const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, bool goBold, sf::Sound& hoverSoundText, sf::Sound& pressedSoundText,
+	const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, const sf::Color& outlineColor, int outlineThickness, sf::Sound* hoverSoundText, sf::Sound* pressedSoundText,
 	/* Arrows */
-	const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSoundButtons, sf::Sound& pressedSoundButtons)
-	:GuiItem(x, y, { 0.5, 0.5 }, windowResolution,  guiScale), options(options), option(baseOption), distCenterToCenter(distCenterToCenter), hitBoxPos({ 0,0 })
+	const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound* hoverSoundButtons, sf::Sound* pressedSoundButtons)
+	:GuiItem(x, y, origin, windowResolution,  guiScale), options(options), option(baseOption), distItI(distItI), hitBoxPos({ 0,0 })
 {
-	text = new TextButton(0, 0, { 0.5, 0.5 }, windowResolution, guiScale, 
+	text = new TextButton(0, 0, origin, windowResolution, guiScale, 
 		(*options)[baseOption], font, charSize, idleColor, hoverColor,
-		goBold, hoverSoundText, pressedSoundText);
+		outlineColor, outlineThickness, hoverSoundText, pressedSoundText);
 
-	buttonL = new SpriteButton(0, 0, {0.5, 0.5}, windowResolution, guiScale,
+	buttonL = new SpriteButton(0, 0, origin, windowResolution, guiScale,
 		textureFile, scaleOnHover, hoverSoundButtons, pressedSoundButtons);
 
-	buttonR = new SpriteButton(0, 0, {0.5, 0.5}, windowResolution, guiScale,
+	buttonR = new SpriteButton(0, 0, origin, windowResolution, guiScale,
 		textureFile, scaleOnHover, hoverSoundButtons, pressedSoundButtons);
 	buttonR->setRotation(180);
 
@@ -29,6 +29,7 @@ Selector::~Selector()
 	delete text;
 	delete buttonL;
 	delete buttonR;
+	delete options;
 }
 
 // GL methods
@@ -38,13 +39,15 @@ bool Selector::update(const MouseState& mouseState)
 		option--;
 		if (option == -1) option = options->size() - 1;
 		text->setString((*options)[option]);
-		text->moveHitBox(hitBoxPos.x, hitBoxPos.y);
+		
+		doButtons();
 	}
 	if (buttonR->update(mouseState)) {
 		option++;
 		if (option == options->size()) option = 0;
 		text->setString((*options)[option]);
-		text->moveHitBox(hitBoxPos.x, hitBoxPos.y);
+		
+		doButtons();
 	}
 	if (text->update(mouseState)) return true;
 
@@ -70,12 +73,25 @@ void Selector::create(const sf::Vector2u& windowResolution, const sf::Vector2f& 
 	buttonL->create(windowResolution, guiScale);
 	buttonR->create(windowResolution, guiScale);
 
-	buttonL->setPosition(-distCenterToCenter * guiScale.x, 0);
-	buttonL->doHitBox();
-	buttonR->setPosition(distCenterToCenter * guiScale.x, 0);
-	buttonR->doHitBox();
+	doButtons();
 
 	moveHitBox(getPosition().x, getPosition().y);
+}
+
+void Selector::doButtons()
+{
+	text->move((buttonL->getGlobalBounds().width + distItI) * (1 - origin.x * 2), 0);
+	text->doHitBox();
+	text->moveHitBox(hitBoxPos.x, hitBoxPos.y);
+
+	buttonL->setPosition(text->getGlobalBounds().left - hitBoxPos.x - distItI - buttonL->getGlobalBounds().width * (1 - origin.x), 0);
+	buttonL->doHitBox();
+	buttonL->moveHitBox(hitBoxPos.x, hitBoxPos.y);
+
+	buttonR->setPosition(text->getGlobalBounds().left - hitBoxPos.x + text->getGlobalBounds().width + distItI + buttonR->getGlobalBounds().width * (1 - origin.x), 0);
+	buttonR->doHitBox();
+	buttonR->moveHitBox(buttonR->getGlobalBounds().width * (origin.x - 0.5) * 2, 0);
+	buttonR->moveHitBox(hitBoxPos.x, hitBoxPos.y);
 }
 
 // Specific methods
@@ -90,16 +106,11 @@ void Selector::moveHitBox(float x, float y)
 
 const sf::FloatRect& Selector::getGlobalBounds()
 {
-	if (text->getGlobalBounds().top > buttonL->getGlobalBounds().top) {
-		return sf::FloatRect(
-			sf::Vector2f({buttonL->getGlobalBounds().left, text->getGlobalBounds().top}),
-			sf::Vector2f({buttonR->getGlobalBounds().left + buttonR->getGlobalBounds().width - buttonL->getGlobalBounds().left ,text->getGlobalBounds().height})
-		);
-	}
-	return sf::FloatRect(
-		sf::Vector2f({ buttonL->getGlobalBounds().left, buttonL->getGlobalBounds().top }),
-		sf::Vector2f({ buttonR->getGlobalBounds().left + buttonR->getGlobalBounds().width - buttonL->getGlobalBounds().left , buttonL->getGlobalBounds().height })
-	);
+	globalBounds = sf::FloatRect(
+		sf::Vector2f({ buttonL->getGlobalBounds().left, text->getGlobalBounds().top }),
+		sf::Vector2f({ buttonR->getGlobalBounds().left + buttonR->getGlobalBounds().width - buttonL->getGlobalBounds().left ,
+			text->getGlobalBounds().height }));
+	return globalBounds;
 }
 
 void* Selector::getInfo()

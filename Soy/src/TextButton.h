@@ -9,7 +9,7 @@ public:
 	// Constructors & destructors
 	TextButton(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
 		const std::string& name, const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, 
-		bool goBold, sf::Sound& hoverSound, sf::Sound& pressedSound);
+		const sf::Color& outlineColor, int outlineThickness, sf::Sound* hoverSound, sf::Sound* pressedSound);
 	virtual ~TextButton();
 
 	// GL methods
@@ -28,7 +28,6 @@ public:
 private:
 	sf::Text text;
 	int charSize;
-	bool goBold;
 	bool colorControler;
 	sf::Color idleColor;
 	sf::Color hoverColor;

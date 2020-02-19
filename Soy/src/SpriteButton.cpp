@@ -3,21 +3,20 @@
 
 // Constructors & destructors
 SpriteButton::SpriteButton(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
-	const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound& hoverSound, sf::Sound& pressedSound)
+	const std::string& textureFile, const sf::Vector2f& scaleOnHover, sf::Sound* hoverSound, sf::Sound* pressedSound)
 	: Button(x, y, origin, windowResolution, guiScale, hoverSound, pressedSound),
-	scaleOnHover(scaleOnHover)
+	scaleOnHover(scaleOnHover), actualTexture(0)
 {
-	idleTexture = new sf::Texture();
-	if (!idleTexture->loadFromFile(textureFile)) LOG_CRITICAL("Could not load {0}", textureFile);
+	textures.push_back(new sf::Texture);
+	if (!textures[actualTexture]->loadFromFile(textureFile)) LOG_CRITICAL("Could not load {0}", textureFile);
 
-	sprite.setTexture(*idleTexture);
-
-	create(windowResolution, guiScale);
+	setTexture(actualTexture);
 }
 
 SpriteButton::~SpriteButton()
 {
-	delete idleTexture;
+	for (auto i : textures)
+		delete i;
 }
 
 // GL methods
@@ -64,7 +63,26 @@ void SpriteButton::doHitBox() {
 	hitBox.top += getPosition().y;
 }
 
+void SpriteButton::addTexture(const std::string& textureFile)
+{
+	textures.push_back(new sf::Texture);
+	if (!textures.back()->loadFromFile(textureFile)) LOG_CRITICAL("Could not load {0}", textureFile);
+}
+
+void SpriteButton::setTexture(int pos)
+{
+	actualTexture = pos;
+	sprite.setTexture(*textures[actualTexture]);
+	create(windowResolution, guiScale);
+}
+
+const int SpriteButton::getActualTexture()
+{
+	return actualTexture;
+}
+
 const sf::FloatRect& SpriteButton::getGlobalBounds()
 {
-	return hitBox;
+	globalBounds = hitBox;
+	return globalBounds;
 }

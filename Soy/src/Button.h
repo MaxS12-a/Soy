@@ -8,7 +8,7 @@ class Button :
 public:
 	// Constructors & destructors
 	Button(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale, 
-		sf::Sound& hoverSound, sf::Sound& pressedSound);
+		sf::Sound* hoverSound, sf::Sound* pressedSound);
 	virtual ~Button();
 
 	// Methods
@@ -23,7 +23,7 @@ protected:
 
 	bool hover;
 
-	sf::Sound& hoverSound;
-	sf::Sound& pressedSound;
+	sf::Sound* hoverSound;
+	sf::Sound* pressedSound;
 };
 

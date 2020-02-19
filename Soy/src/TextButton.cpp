@@ -4,9 +4,9 @@
 // Constructors & destructors
 TextButton::TextButton(float x, float y, const sf::Vector2f& origin, const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale,
 	const std::string& name, const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, 
-	bool goBold, sf::Sound& hoverSound, sf::Sound& pressedSound)
+	const sf::Color& outlineColor, int outlineThickness, sf::Sound* hoverSound, sf::Sound* pressedSound)
 	: Button(x, y, origin, windowResolution, guiScale, hoverSound, pressedSound), 
-	charSize(charSize), goBold(goBold),	colorControler(false)
+	charSize(charSize),	colorControler(false)
 {
 	this->idleColor = idleColor;
 	this->hoverColor = hoverColor;
@@ -14,6 +14,8 @@ TextButton::TextButton(float x, float y, const sf::Vector2f& origin, const sf::V
 	text.setFont(font);
 	text.setString(name);
 	text.setFillColor(idleColor);
+	text.setOutlineColor(outlineColor);
+	text.setOutlineThickness(outlineThickness);
 
 	create(windowResolution, guiScale);
 }
@@ -30,13 +32,9 @@ bool TextButton::update(const MouseState& mouseState)
 	if (hover && !colorControler) {
 		colorControler = true;
 		text.setFillColor(hoverColor); 
-		if(goBold)
-			text.setStyle(sf::Text::Bold);
 	}else if(!hover && colorControler) {
 		colorControler = false;
 		text.setFillColor(idleColor);
-		if(goBold)
-			text.setStyle(sf::Text::Regular);
 	}
 
 	return false;
@@ -80,5 +78,6 @@ void TextButton::setString(const std::string& newString)
 
 const sf::FloatRect& TextButton::getGlobalBounds()
 {
-	return hitBox;
+	globalBounds = hitBox;
+	return globalBounds;
 }

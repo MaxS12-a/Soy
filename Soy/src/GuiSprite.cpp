@@ -42,5 +42,6 @@ void GuiSprite::create(const sf::Vector2u& windowResolution, const sf::Vector2f&
 // Specific methods
 const sf::FloatRect& GuiSprite::getGlobalBounds()
 {
-	return sf::FloatRect(getPosition(), { sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
+	globalBounds = sf::FloatRect(getPosition(), { sprite.getGlobalBounds().width, sprite.getGlobalBounds().height });
+	return globalBounds;
 }

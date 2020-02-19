@@ -18,10 +18,8 @@ private:
 	Gui gui;
 	int selectedObject;
 
-	std::vector<std::string>* videoModes;
-
 	sf::Music* mmMusic;
 
-	BGMovSprite* bgmovsprite;
+	Background* background;
 };
 

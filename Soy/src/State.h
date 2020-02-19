@@ -1,5 +1,4 @@
 #pragma once
-
 class Game;
 
 struct StateStuff{
@@ -9,21 +8,19 @@ struct StateStuff{
 	sf::Vector2f guiScale;
 	
 	struct Volumes {
-		Volumes(float musicVol, float guiVol) : musicVol(musicVol), guiVol(guiVol) {};
+		Volumes(bool muted,	float musicVol,	float guiVol);
+
+		bool muted;
 		float musicVol;
 		float guiVol;
 	
-		void increaseMusicVol(float vol) {
-			musicVol += vol;
-			if (musicVol >= 100) musicVol = 100;
-			else if (musicVol <= 0) musicVol = 0;
-		}
+		void mute();
+		void increaseMusicVol(float vol);
+		void increaseGuiVol(float vol);
 
-		void increaseGuiVol(float vol) {
-			guiVol += vol;
-			if (guiVol >= 100) guiVol = 100;
-			else if (guiVol <= 0) guiVol = 0;
-		}
+	private:
+		float musicVolUM;
+		float guiVolUM;
 
 	} volumes;
 };
