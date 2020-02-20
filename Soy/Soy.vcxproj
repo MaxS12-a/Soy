@@ -167,6 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GuiCheckBox.cpp" />
+    <ClCompile Include="src\GuiSlider.cpp" />
     <ClCompile Include="src\MMSettingsState.cpp" />
     <ClCompile Include="src\BGMovSprite.cpp" />
     <ClCompile Include="src\Background.cpp" />
@@ -194,6 +196,8 @@
     <ClCompile Include="src\TextButton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GuiCheckBox.h" />
+    <ClInclude Include="src\GuiSlider.h" />
     <ClInclude Include="src\MMSettingsState.h" />
     <ClInclude Include="src\BGMovSprite.h" />
     <ClInclude Include="src\Background.h" />

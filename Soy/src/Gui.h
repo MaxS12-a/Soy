@@ -2,6 +2,7 @@
 #include "Selector.h"
 #include "GuiSprite.h"
 #include "GuiContainer.h"
+#include "GuiSlider.h"
 
 // Class used to easely manipulate guiItems.
 class Gui

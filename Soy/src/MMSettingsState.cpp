@@ -15,7 +15,6 @@ MMSettingsState::MMSettingsState(StateStuff* stateStuff, sf::Music* mmMusic)
 
 	gui.addItem(1, new GuiSprite(960, 540, { 0.5, 0.5 }, stateStuff->windowSize, stateStuff->guiScale, "Resources/Images/AlphaGear.png"));
 
-
 	gui.addItem(2, new GuiContainer(250, 200, stateStuff->windowSize, stateStuff->guiScale, 20));
 
 	((GuiContainer*)gui.getItem(2))->addItem(1, new TextButton(0, 0, { 0, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
@@ -54,14 +53,18 @@ MMSettingsState::MMSettingsState(StateStuff* stateStuff, sf::Music* mmMusic)
 
 	((GuiContainer*)gui.getItem(3))->addItem(3, new TextButton(0, 0, { 1, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
 		"Fullscreen", gui.getFont("Komikax"), 85, sf::Color::White, sf::Color::Yellow, sf::Color::Black, 10, &gui.getSound("Click"), nullptr));
-	((GuiContainer*)gui.getItem(3))->addItem(4, new TextButton(0, 0, { 1, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
-		"Volume", gui.getFont("Komikax"), 85, sf::Color::White, sf::Color::Green, sf::Color::Black, 10, &gui.getSound("Click"), nullptr));
-	((GuiContainer*)gui.getItem(3))->addItem(5, new TextButton(0, 0, { 1, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
-		"Apply", gui.getFont("Komikax"), 85, sf::Color::White, sf::Color::Red, sf::Color::Black, 10, &gui.getSound("Click"), nullptr));
+
+	std::vector<std::string>* options3 = new std::vector<std::string>();
+	for (int i = 0; i <= 100; i++)
+		options3->push_back(std::string(std::to_string(i)));
+
+	((GuiContainer*)gui.getItem(3))->addItem(4, new GuiSlider(0, 0, { 1, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
+		"Resources/Images/SliderBar.png", "Resources/Images/SliderBarFilled.png", "Resources/Images/SliderItem.png", sf::Color(0,0,255,220),
+		options3, 16, gui.getFont("Komikax"), 30, sf::Color(255, 215, 0, 255), sf::Color::Black, 6, &gui.getSound("Click"), nullptr));
 
 	gui.getItem(3)->create(stateStuff->windowSize, stateStuff->guiScale);
 
-	background = new Background(0, 0, "Resources/Images/MMSSBG.jpg", { 0, 0, 1920, 1080 }, 1, -1, stateStuff->windowSize);
+	background= new Background(0, 0, "Resources/Images/MMSSBG.jpg", { 0, 0, 1920, 1080 }, 1, -1, stateStuff->windowSize);
 	background->addBGMovSprite(new BGMovSprite("Resources/Images/WPixel.png", { 0, 0, 15, 15 }, 10, 20, 6, { 0, 0, 1920, 900 }, 380, { 0, -0.2 }, stateStuff->windowSize));
 
 	mmMusic->setVolume(stateStuff->volumes.musicVol);
@@ -114,6 +117,13 @@ void MMSettingsState::render()
 {
 	background->render(stateStuff->window);
 	gui.render(stateStuff->window);
+
+	/*sf::RectangleShape a;
+	a.setFillColor(sf::Color(100,100,100,100));
+	sf::FloatRect ab = ((GuiContainer*)gui.getItem(3))->getItem(3)->getGlobalBounds();
+	a.setPosition(ab.left, ab.top);
+	a.setSize(sf::Vector2f(ab.width, ab.height));
+	stateStuff->window->draw(a);*/
 }
 
 void MMSettingsState::pauseState()

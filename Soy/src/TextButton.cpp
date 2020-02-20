@@ -6,16 +6,17 @@ TextButton::TextButton(float x, float y, const sf::Vector2f& origin, const sf::V
 	const std::string& name, const sf::Font& font, int charSize, const sf::Color& idleColor, const sf::Color& hoverColor, 
 	const sf::Color& outlineColor, int outlineThickness, sf::Sound* hoverSound, sf::Sound* pressedSound)
 	: Button(x, y, origin, windowResolution, guiScale, hoverSound, pressedSound), 
-	charSize(charSize),	colorControler(false)
+	colorControler(false)
 {
 	this->idleColor = idleColor;
 	this->hoverColor = hoverColor;
 
+	text.setOutlineThickness(outlineThickness);
+	text.setCharacterSize(charSize);
 	text.setFont(font);
 	text.setString(name);
 	text.setFillColor(idleColor);
 	text.setOutlineColor(outlineColor);
-	text.setOutlineThickness(outlineThickness);
 
 	create(windowResolution, guiScale);
 }
@@ -53,7 +54,7 @@ void TextButton::create(const sf::Vector2u& windowResolution, const sf::Vector2f
 
 	setPosition(x / 1920 * windowResolution.x, y / 1080 * windowResolution.y);
 
-	text.setCharacterSize(charSize * guiScale.y);
+	text.setScale(guiScale);
 	text.setPosition(0, 0);
 	text.setOrigin(0, 0);
 	text.setPosition(-text.getGlobalBounds().left, -text.getGlobalBounds().top);

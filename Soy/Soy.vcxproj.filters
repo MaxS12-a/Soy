@@ -78,6 +78,12 @@
     <ClCompile Include="src\MMSettingsState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="src\GuiCheckBox.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GuiSlider.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TextButton.h">
@@ -127,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="src\MMSettingsState.h">
       <Filter>States\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GuiCheckBox.h">
+      <Filter>Gui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GuiSlider.h">
+      <Filter>Gui\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

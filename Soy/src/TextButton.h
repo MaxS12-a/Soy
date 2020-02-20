@@ -27,7 +27,6 @@ public:
 
 private:
 	sf::Text text;
-	int charSize;
 	bool colorControler;
 	sf::Color idleColor;
 	sf::Color hoverColor;
