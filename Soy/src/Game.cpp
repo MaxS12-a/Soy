@@ -62,7 +62,9 @@ void Game::run() {
 
 void Game::update()
 {
-    stateStack.top()->update();
+    if (window.hasFocus()) {
+        stateStack.top()->update();
+    }
 
     while (window.pollEvent(event))
     {
@@ -73,11 +75,13 @@ void Game::update()
 
 void Game::render()
 {
-     window.clear();
-    
-     stateStack.top()->render();
-    
-     window.display();
+    if (window.hasFocus()) {
+        window.clear();
+
+        stateStack.top()->render();
+
+        window.display();
+    }
 }
 
 //Getters and setters

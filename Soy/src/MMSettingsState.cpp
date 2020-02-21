@@ -51,8 +51,8 @@ MMSettingsState::MMSettingsState(StateStuff* stateStuff, sf::Music* mmMusic)
 		0, gui.getFont("Komikax"), 85, sf::Color::White, sf::Color::Yellow, sf::Color::Black, 10, &gui.getSound("Click"), nullptr,
 		"Resources/Images/Arrow.png", { 1.05, 1.05 }, &gui.getSound("Punun"), &gui.getSound("Tchum")));
 
-	((GuiContainer*)gui.getItem(3))->addItem(3, new TextButton(0, 0, { 1, 0.5 }, stateStuff->windowSize, stateStuff->guiScale,
-		"Fullscreen", gui.getFont("Komikax"), 85, sf::Color::White, sf::Color::Yellow, sf::Color::Black, 10, &gui.getSound("Click"), nullptr));
+	((GuiContainer*)gui.getItem(3))->addItem(3, new GuiCheckBox(-10, 0, {1, 0.5}, stateStuff->windowSize, stateStuff->guiScale,
+		"Resources/Images/Checkbox.png", { 0, 0, 100, 100 }, {1, 1.1}, &gui.getSound("Punun"), &gui.getSound("Click")));
 
 	std::vector<std::string>* options3 = new std::vector<std::string>();
 	for (int i = 0; i <= 100; i++)

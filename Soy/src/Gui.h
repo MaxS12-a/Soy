@@ -3,6 +3,7 @@
 #include "GuiSprite.h"
 #include "GuiContainer.h"
 #include "GuiSlider.h"
+#include "GuiCheckBox.h"
 
 // Class used to easely manipulate guiItems.
 class Gui

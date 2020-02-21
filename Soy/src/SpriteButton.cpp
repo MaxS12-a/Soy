@@ -43,6 +43,7 @@ void SpriteButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void SpriteButton::create(const sf::Vector2u& windowResolution, const sf::Vector2f& guiScale)
 {
+	this->windowResolution = windowResolution;
 	this->guiScale = guiScale;
 
 	setPosition(x / 1920 * windowResolution.x, y / 1080 * windowResolution.y);
