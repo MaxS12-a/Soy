@@ -22,6 +22,8 @@ public:
 	void doHitBox();
 
 	const sf::FloatRect& getGlobalBounds();
+
+	void* getInfo();
 private:
 	sf::Texture* texture;
 	sf::IntRect textureRect;

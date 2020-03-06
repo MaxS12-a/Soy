@@ -84,9 +84,7 @@ bool GuiSlider::update(const MouseState& mouseState)
 				updateTextureRects();
 				doHitBox();
 				setTextPos();
-			}
-			
-			
+			}			
 		} else {
 			pressed = false;
 		}
@@ -95,10 +93,9 @@ bool GuiSlider::update(const MouseState& mouseState)
 		initialMousePosWindowx = 0;
 	}
 
-	if (pressed && mouseState.mouseReleasedLeft) {
+	if (pressed && mouseState.mouseReleasedLeft)
 		pressed = false;
-		return true;
-	}
+
 	return false;	
 }
 

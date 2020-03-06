@@ -43,7 +43,7 @@ bool GuiCheckBox::update(const MouseState& mouseState)
 			textureRect.left = textureRect.width;
 			sprite.setTextureRect(textureRect);
 		}
-	}else{
+	}else if(!marked){
 		if (textureRect.left != 0) {
 			textureRect.left = 0;
 			sprite.setTextureRect(textureRect);
@@ -69,11 +69,11 @@ void GuiCheckBox::create(const sf::Vector2u& windowResolution, const sf::Vector2
 
 	setPosition(x / 1920 * windowResolution.x, y / 1080 * windowResolution.y);
 
-	sprite.setOrigin(0, 0);
-	std::pair<int, int> newOrigin = getNewOrigin(origin,
-		std::pair<int, int>(sprite.getTexture()->getSize().x, sprite.getTexture()->getSize().y));
-	sprite.setOrigin(newOrigin.first, newOrigin.second);
 	sprite.setScale(guiScale);
+
+	std::pair<int, int> newOrigin = getNewOrigin(origin,
+		std::pair<int, int>(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height));
+	sprite.setOrigin(newOrigin.first, newOrigin.second);
 
 	doHitBox();
 }
@@ -90,4 +90,9 @@ const sf::FloatRect& GuiCheckBox::getGlobalBounds()
 {
 	
 	return hitBox;
+}
+
+void* GuiCheckBox::getInfo()
+{
+	return new bool(marked);
 }

@@ -6,6 +6,8 @@
 MainMenuState::MainMenuState(StateStuff* stateStuff)
 	:State(stateStuff)
 {
+	// *** //
+
 	gui.addSound("BikeChange", "Resources/Sounds/BikeChange.ogg");
 	gui.addSound("Click", "Resources/Sounds/Click.ogg");
 	gui.addSound("LongClick", "Resources/Sounds/LongClick.ogg");
@@ -14,14 +16,23 @@ MainMenuState::MainMenuState(StateStuff* stateStuff)
 
 	gui.addFont("Komikax", "Resources/Fonts/Komikax.ttf");
 
+	// *** //
+
 	gui.addItem(1, new SpriteButton(1920, 1080, { 1, 1 }, stateStuff->windowSize, stateStuff->guiScale,
 		"Resources/Images/Gear.png", { 1.05, 1.05 }, &gui.getSound("LongClick"), &gui.getSound("BikeChange")));
+
+	// *** //
+
 	gui.addItem(2, new SpriteButton(1920, 0, { 1, 0 }, stateStuff->windowSize, stateStuff->guiScale,
 		"Resources/Images/Sound.png", { 1.05, 1.05 }, &gui.getSound("Punun"), &gui.getSound("Tchum")));
 	((SpriteButton*)gui.getItem(2))->addTexture("Resources/Images/SoundMuted.png");
 
+	// *** //
+
 	gui.addItem(3, new GuiSprite(1920 / 4 + 100, 0, { 0.5, 0 }, stateStuff->windowSize, stateStuff->guiScale,
 		"Resources/Images/Soyura.png"));
+
+	// *** //
 
 	gui.addItem(4, new GuiContainer(1920 / 4 + 100, 430, stateStuff->windowSize, stateStuff->guiScale, 30));
 
@@ -38,9 +49,13 @@ MainMenuState::MainMenuState(StateStuff* stateStuff)
 
 	gui.getItem(4)->create(stateStuff->windowSize, stateStuff->guiScale);
 
+	// *** //
+
 	mmMusic = new sf::Music();
 	mmMusic->openFromFile("Resources/Sounds/MMSMusic.wav");
 	mmMusic->setLoop(true);
+
+	// *** //
 
 	background = new Background(0, 0, "Resources/Images/BG.png", { 0, 0, 1920, 1080 }, 4, 60, stateStuff->windowSize);
 	background->addBGMovSprite(new BGMovSprite("Resources/Images/Pixel.png", { 0, 0, 15, 15 }, 10, 16, 5, { 0, 0, 1920, 1080 }, 320, { 0, 0 }, stateStuff->windowSize));
@@ -48,6 +63,8 @@ MainMenuState::MainMenuState(StateStuff* stateStuff)
 	background->addBGMovSprite(new BGMovSprite("Resources/Images/Pixel.png", { 0, 0, 15, 15 }, 10, 4, 3, { 0, 0, 1920, 1080 }, 80, { 0, 0 }, stateStuff->windowSize));
 	background->addBGMovSprite(new BGMovSprite("Resources/Images/Pixel.png", { 0, 0, 15, 15 }, 10, 2, 2, { 0, 0, 1920, 1080 }, 40, { 0, 0 }, stateStuff->windowSize));
 	background->addBGMovSprite(new BGMovSprite("Resources/Images/Pixel.png", { 0, 0, 15, 15 }, 10, 1, 1, { 0, 0, 1920, 1080 }, 10, { 5, 0 }, stateStuff->windowSize));
+
+	// *** //
 
 	mmMusic->setVolume(stateStuff->volumes.musicVol);
 	gui.setVolume(stateStuff->volumes.guiVol);

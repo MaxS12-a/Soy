@@ -48,10 +48,10 @@ void SpriteButton::create(const sf::Vector2u& windowResolution, const sf::Vector
 
 	setPosition(x / 1920 * windowResolution.x, y / 1080 * windowResolution.y);
 
-	sprite.setOrigin(0, 0);
 	std::pair<int, int> newOrigin = getNewOrigin(origin,
 		std::pair<int, int>(sprite.getTexture()->getSize().x, sprite.getTexture()->getSize().y));
 	sprite.setOrigin(newOrigin.first, newOrigin.second);
+
 	sprite.setScale(guiScale);
 
 	doHitBox();

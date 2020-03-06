@@ -13,8 +13,12 @@ public:
 	void update();
 	void render();
 
+	void applyChanges(bool ret);
+
 	void pauseState();
 	void resumeState();
+
+	
 private:
 	Gui gui;
 	Background* background;
